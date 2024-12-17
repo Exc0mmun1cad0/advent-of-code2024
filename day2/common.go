@@ -11,3 +11,16 @@ func abs(x int) int {
 	}
 	return x
 }
+
+func concatSlices(s1, s2 []int) []int {
+	result := make([]int, 0, len(s1)+len(s2))
+
+	for _, el := range s1 {
+		result = append(result, el)
+	}
+	for _, el := range s2 {
+		result = append(result, el)
+	}
+
+	return result
+}
