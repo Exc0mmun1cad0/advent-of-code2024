@@ -10,22 +10,12 @@ import (
 	"strings"
 )
 
-const (
-	inputFile = "input.txt"
-	linesCnt  = 1e3
-	sep       = "   "
-)
-
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
-}
-
 func PartOneSolution() {
 	f, _ := os.Open(inputFile)
+	defer f.Close()
+
 	scanner := bufio.NewScanner(f)
+
 	nums1, nums2 := make([]int, 0, linesCnt), make([]int, 0, linesCnt)
 
 	for scanner.Scan() {
