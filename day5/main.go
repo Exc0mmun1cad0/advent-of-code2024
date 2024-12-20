@@ -61,6 +61,28 @@ func main() {
 	}
 
 	// fmt.Println(PartOneSolution(scanner, rules))
+	// fmt.Println(PartTwoSolution(scanner, rules))
+}
+
+func PartTwoSolution(scanner *bufio.Scanner, rules map[int]map[int]struct{}) int {
+	sum := 0 // result sum of middle elements
+
+	for scanner.Scan() {
+		line := scanner.Text()
+
+		strNums := strings.Split(line, ",")
+		nums := make([]int, 0, len(strNums))
+		for _, strNum := range strNums {
+			num, _ := strconv.Atoi(strNum)
+			nums = append(nums, num)
+		}
+
+		if isCorrect, sortedNums := checkAndSortUpd(nums, rules); !isCorrect {
+			sum += sortedNums[len(sortedNums)/2]
+		}
+	}
+
+	return sum
 }
 
 func PartOneSolution(scanner *bufio.Scanner, rules map[int]map[int]struct{}) int {
