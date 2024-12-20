@@ -5,25 +5,52 @@ import (
 	"bytes"
 	"fmt"
 	"os"
+	"slices"
 )
 
 const (
 	inputFile = "input.txt"
 )
 
-func PartOneSolution() {
+func main() {
 	f, _ := os.Open(inputFile)
 	defer f.Close()
 
 	scanner := bufio.NewScanner(f)
 
 	lines := make([]string, 0)
-	linesCnt := 0
 
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
-		linesCnt++
 	}
+
+	fmt.Println(PartTwoSolution(lines))
+}
+
+func PartTwoSolution(lines []string) int {
+	linesCnt := len(lines)
+	lineLength := len(lines[0])
+
+	cnt := 0
+
+	for i := 1; i < linesCnt-1; i++ {
+		for j := 1; j < lineLength-1; j++ {
+			if lines[i][j] == byte('A') {
+				letters := string([]byte{lines[i+1][j+1], lines[i-1][j-1], lines[i+1][j-1], lines[i-1][j+1]})
+				if slices.Contains(
+					[]string{"SMSM", "SMMS", "MSSM", "MSMS"}, letters,
+				) {
+					cnt++
+				}
+			}
+		}
+	}
+
+	return cnt
+}
+
+func PartOneSolution(lines []string) int {
+	linesCnt := len(lines)
 	lineLength := len(lines[0])
 
 	cnt := 0
@@ -87,5 +114,5 @@ func PartOneSolution() {
 		}
 	}
 
-	fmt.Println(cnt)
+	return cnt
 }
