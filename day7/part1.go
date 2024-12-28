@@ -8,12 +8,13 @@ import (
 	"strings"
 )
 
-func recursion(arr []int, pos int, initNum int, sample int) bool {
+// Recursion for task 1
+func rec1(arr []int, pos int, initNum int, sample int) bool {
 	if pos == len(arr) {
 		return initNum == sample
 	}
 
-	return recursion(arr, pos+1, initNum+arr[pos], sample) || recursion(arr, pos+1, initNum*arr[pos], sample)
+	return rec1(arr, pos+1, initNum+arr[pos], sample) || rec1(arr, pos+1, initNum*arr[pos], sample)
 }
 
 func PartOneSolution() {
@@ -34,7 +35,7 @@ func PartOneSolution() {
 			nums = append(nums, num)
 		}
 
-		if recursion(nums, 1, nums[0], testVal) {
+		if rec1(nums, 1, nums[0], testVal) {
 			result += testVal
 		}
 	}
