@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	f, _ := os.Open("input.txt")
+	f, _ := os.Open("data/input.txt")
 	reader := bufio.NewReader(f)
 
 	diskMap, err := ReadLongLine(reader)
@@ -15,4 +15,5 @@ func main() {
 	memory, _ := buildDisk(diskMap)
 
 	PartOneSolution(memory)
+	PartTwoSolution(memory)
 }
